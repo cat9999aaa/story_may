@@ -1,0 +1,59 @@
+---
+import { getLocaleFromUrl, useTranslations } from '@/i18n/utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+<section id="showcase" class="py-32 relative">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="reveal section-title mb-4">
+        <span class="gradient-text">{t.showcase.title}</span>
+      </h2>
+      <p class="reveal animation-delay-100 section-subtitle">
+        {t.showcase.subtitle}
+      </p>
+    </div>
+    
+    <div class="reveal animation-delay-200 relative group">
+      <div class="absolute -inset-4 bg-gradient-to-r from-magic-500/20 via-shimmer/20 to-spark-500/20 rounded-[2rem] blur-2xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
+      
+      <div class="relative glass-card overflow-hidden aspect-video">
+        <div class="absolute inset-0 bg-gradient-to-br from-magic-500/20 via-cosmic-800 to-spark-500/10 flex items-center justify-center">
+          <button 
+            id="play-button"
+            class="relative w-24 h-24 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center group/btn hover:scale-110 transition-all duration-300 cursor-pointer"
+            aria-label={t.showcase.playVideo}
+          >
+            <div class="absolute inset-0 rounded-full bg-magic-500/20 animate-ping"></div>
+            <svg class="w-10 h-10 text-white ml-1 relative z-10" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+            </svg>
+          </button>
+        </div>
+        
+        <div class="absolute inset-0 pointer-events-none">
+          <div class="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-magic-500/30 rounded-tl-2xl"></div>
+          <div class="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-magic-500/30 rounded-tr-2xl"></div>
+          <div class="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-magic-500/30 rounded-bl-2xl"></div>
+          <div class="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-magic-500/30 rounded-br-2xl"></div>
+        </div>
+        
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(6)].map((_, i) => (
+            <div 
+              class="absolute w-1.5 h-1.5 bg-magic-300 rounded-full animate-float"
+              style={`
+                left: ${10 + Math.random() * 80}%;
+                top: ${10 + Math.random() * 80}%;
+                animation-delay: ${Math.random() * 4}s;
+                opacity: ${0.4 + Math.random() * 0.4};
+              `}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
